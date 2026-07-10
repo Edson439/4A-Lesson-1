@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Learning Virtual</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="colorchart.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <div class="container">
+	 
+	<img src="images/Virtual_03.png" alt="Logo" class="logo2">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+		<div class="menu-top">
+			<button class="hamburger toggle-sidebar"><i class="fas fa-bars"></i></button>
+		</div>
+		<nav class="menu">
+			<a href="#" class="menu-item active" id="menuPart1">
+			  <img src="images/icons-10.png" alt="Part 1 icon" class="icon">
+			  <span>Vowels</span>
+			</a>
+			<a href="#" class="menu-item" id="menuPart2">
+			  <img src="images/icons-11.png" alt="Part 2 icon" class="icon">
+			  <span>Consonants</span>
+			</a>
+			<a href="#" class="menu-item" id="menuPart3">
+			  <img src="images/icons-12.png" alt="Part 3 icon" class="icon">
+			  <span>Phonics</span>
+			</a>
+			<hr>
+			<span class="section-title" style="margin-top: 20px;">Tools</span>
+			<a href="#" class="menu-item" id="menuColorChart">
+			  <img src="images/icons-02.png" alt="Color Chart icon" class="icon">
+			  <span>Color Chart</span>
+			</a>
+			<a href="#" class="menu-item" id="menuWhiteboard">
+			  <img src="images/icons-04.png" alt="Whiteboard icon" class="icon">
+			  <span>Whiteboard</span>
+			</a>			<a href="manual.html" target="_blank" class="menu-item" id="menuManual">
+			  <img src="images/icons-07.png" alt="Manual icon" class="icon">
+			  <span>Manual</span>
+			</a>
+		</nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <div class="video-wrapper">
+        
+		<!-- Dots -->
+		<div class="dots" id="dotsContainer"></div>
+
+		<!-- Part 1 -->
+		<div id="part1Content" style="display: none;">
+		  <div class="card-container">
+			<div class="vocab-card active">
+			  <iframe src="p1.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 50px;"></iframe>
+			</div>
+			<div class="vocab-card">
+			  <iframe src="j1.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+			</div>
+		  </div>
+		</div>
+		  
+	<!-- Part 2 -->
+	<div id="part2Content" style="display: none;">
+  <div class="card-container">
+    <div class="vocab-card active">
+      <iframe src="p2.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 50px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="j2.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="p3.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 50px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="j3.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="p4.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 50px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="j4.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="p5.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 50px;"></iframe>
+    </div>
+    <div class="vocab-card">
+      <iframe src="j5.html" width="900px" height="100%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+    </div>
+  </div>
+</div>
+		  
+		<!-- Part 3 -->
+		<div id="part3Content" style="display: none;">
+			  <div class="card-container" style="height: 800px;">
+				<!-- a --> 
+				<div class="vocab-card active">
+				  <div class="containermov">
+					<div class="group-left">
+					  <div class="circle revealed no-click">
+						<img src="ABC/a.png" alt="Imagen 1">
+					  </div>
+					  <img src="ABC/Flecha1.png" alt="Flecha" class="warmup-img" style="height: 116px;">
+					  <div class="circle" onclick="toggleImage(this)">
+						<img src="CC/CC-01.png">
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<!-- mat --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word" style="font-size: 129px; margin-bottom: 171px;">
+							  <span class="dark">m</span><span class="dark">a</span><span class="dark">t</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- mat --> 
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="warmup-center2">
+					  <img src="images/mat.png" alt="img1" class="warmup-full-img" style="height: 417.7px">
+
+					  <button class="btnCC" onclick="playAudio('audios/mat.mp3')">
+						<i class="fas fa-volume-up"></i>
+					  </button>
+
+					  <div class="og-help-float inside-card" onclick="openOgPopup('explanationa.html', this)">
+						<div class="og-help-question">?</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <div class="og-popup-overlay">
+					<div class="og-popup-box">
+					  <button class="og-popup-close">&times;</button>
+					  <iframe class="ogPopupFrame" width="670px" height="90%" style="border: none; border-radius: 10px; margin-top: 0;"></iframe>
+					</div>
+				  </div>
+				</div>
+				<!-- cat --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">c</span><span class="blue">a</span><span class="dark">t</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/cat.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- dad --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">d</span><span class="blue">a</span><span class="dark">d</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/dad.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- cap --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">c</span><span class="blue">a</span><span class="dark">p</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/cap.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+		
+				<!-- e --> 
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="group-left">
+					  <div class="circle revealed no-click">
+						<img src="ABC/e.png">
+					  </div>
+					  <img src="ABC/Flecha1.png" alt="Flecha" class="warmup-img" style="height: 116px;">
+					  <div class="circle" onclick="toggleImage(this)">
+						<img src="CC/CC-04.png">
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<!-- met --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word" style="font-size: 129px; margin-bottom: 171px;">
+							  <span class="dark">m</span><span class="dark">e</span><span class="dark">t</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- met --> 
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="warmup-center2">
+					  <img src="images/met.png" alt="img1" class="warmup-full-img" style="height: 417.7px">
+
+					  <button class="btnCC" onclick="playAudio('audios/met.mp3')">
+						<i class="fas fa-volume-up"></i>
+					  </button>
+
+					  <div class="og-help-float inside-card" onclick="openOgPopup('explanatione.html', this)">
+						<div class="og-help-question">?</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <div class="og-popup-overlay">
+					<div class="og-popup-box">
+					  <button class="og-popup-close">&times;</button>
+					  <iframe class="ogPopupFrame" width="670px" height="90%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+					</div>
+				  </div>
+				</div>
+				<!-- bed --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">b</span><span class="blue">e</span><span class="dark">d</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/bed.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- ten --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">t</span><span class="blue">e</span><span class="dark">n</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/ten.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- sell --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">s</span><span class="blue">e</span><span class="dark">l</span><span class="dark">l</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/sell.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+		
+				<!-- i --> 
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="group-left">
+					  <div class="circle revealed no-click">
+						<img src="ABC/i.png">
+					  </div>
+					  <img src="ABC/Flecha1.png" alt="Flecha" class="warmup-img" style="height: 116px;">
+					  <div class="circle" onclick="toggleImage(this)">
+						<img src="CC/CC-03.png">
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<!-- sit --> 
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word" style="font-size: 129px; margin-bottom: 171px;">
+							  <span class="dark">s</span><span class="dark">i</span><span class="dark">t</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- sit -->
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="warmup-center2">
+					  <img src="images/sit.png" alt="img1" class="warmup-full-img" style="height: 417.7px">
+
+					  <button class="btnCC" onclick="playAudio('audios/sit.mp3')">
+						<i class="fas fa-volume-up"></i>
+					  </button>
+
+					  <!-- BOTÓN TEACH ME -->
+					  <div class="og-help-float inside-card" onclick="openOgPopup('explanationi.html', this)">
+						<div class="og-help-question">?</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <!-- POPUP LOCAL -->
+				  <div class="og-popup-overlay">
+					<div class="og-popup-box">
+					  <button class="og-popup-close">&times;</button>
+					  <iframe class="ogPopupFrame" width="670px" height="90%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+					</div>
+				  </div>
+				</div>
+				<!-- lip -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">l</span><span class="blue">i</span><span class="dark">p</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/lip.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- tin -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">t</span><span class="blue">i</span><span class="dark">n</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/tin.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- miss -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">m</span><span class="blue">i</span><span class="dark">s</span><span class="dark">s</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/miss.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+		
+				<!-- o -->
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="group-left">
+					  <div class="circle revealed no-click">
+						<img src="ABC/o.png">
+					  </div>
+					  <img src="ABC/Flecha1.png" alt="Flecha" class="warmup-img" style="height: 116px;">
+					  <div class="circle" onclick="toggleImage(this)">
+						<img src="CC/CC-05.png">
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<!-- not -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word" style="font-size: 129px; margin-bottom: 171px;">
+							  <span class="dark">n</span><span class="dark">o</span><span class="dark">t</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- not -->
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="warmup-center2">
+					  <img src="images/not.png" alt="img1" class="warmup-full-img" style="height: 417.7px">
+
+					  <button class="btnCC" onclick="playAudio('audios/not.mp3')">
+						<i class="fas fa-volume-up"></i>
+					  </button>
+
+					  <!-- BOTÓN TEACH ME -->
+					  <div class="og-help-float inside-card" onclick="openOgPopup('explanationo.html', this)">
+						<div class="og-help-question">?</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <!-- POPUP LOCAL -->
+				  <div class="og-popup-overlay">
+					<div class="og-popup-box">
+					  <button class="og-popup-close">&times;</button>
+					  <iframe class="ogPopupFrame" width="670px" height="90%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+					</div>
+				  </div>
+				</div>
+				<!-- mop -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">m</span><span class="blue">o</span><span class="dark">p</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/mop.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- box -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">b</span><span class="blue">o</span><span class="dark">x</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/box.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- rock -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">r</span><span class="blue">o</span><span class="dark">c</span><span class="dark">k</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/rock.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				  
+				<!-- u -->
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="group-left">
+					  <div class="circle revealed no-click">
+						<img src="ABC/u.png">
+					  </div>
+					  <img src="ABC/Flecha1.png" alt="Flecha" class="warmup-img" style="height: 116px;">
+					  <div class="circle" onclick="toggleImage(this)">
+						<img src="CC/CC-02.png">
+					  </div>
+					</div>
+				  </div>
+				</div>
+				<!-- cut -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word" style="font-size: 129px; margin-bottom: 171px;">
+							  <span class="dark">c</span><span class="dark">u</span><span class="dark">t</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- cut -->
+				<div class="vocab-card">
+				  <div class="containermov">
+					<div class="warmup-center2">
+					  <img src="images/cut.png" alt="img1" class="warmup-full-img" style="height: 417.7px">
+
+					  <button class="btnCC" onclick="playAudio('audios/cut.mp3')">
+						<i class="fas fa-volume-up"></i>
+					  </button>
+
+					  <!-- BOTÓN TEACH ME -->
+					  <div class="og-help-float inside-card" onclick="openOgPopup('explanationu.html', this)">
+						<div class="og-help-question">?</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <!-- POPUP LOCAL -->
+				  <div class="og-popup-overlay">
+					<div class="og-popup-box">
+					  <button class="og-popup-close">&times;</button>
+					  <iframe class="ogPopupFrame" width="670px" height="90%" style="border: none; border-radius: 10px; margin-top: 0px;"></iframe>
+					</div>
+				  </div>
+				</div>
+				<!-- sun -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">s</span><span class="blue">u</span><span class="dark">n</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/sun.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- bus -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">b</span><span class="blue">u</span><span class="dark">s</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/bus.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+				<!-- cup -->
+				<div class="vocab-card">
+				    <div class="containermov">
+						<div class="warmup-center">
+							<div class="warmup-text-word">
+							  <span class="dark">c</span><span class="blue">u</span><span class="dark">p</span>
+							</div>
+						  <button class="btnCC" onclick="playAudio('audios/cup.mp3')">
+							<i class="fas fa-volume-up"></i>
+						  </button>
+						</div>
+					</div>
+				</div>
+
+			  </div>
+			</div>
+		  
+		<!-- COLOR CHART -->
+		<div id="colorChartContent" style="display: none;">
+		  <div class="card-container">
+
+			<!-- Donde se acumulan los íconos seleccionados -->
+			  <div class="colorChartMain">
+			<div class="selected-icons" id="selectedIcons"></div>
+			  <div class="delete-icons">
+				<button id="clearIconsBtn" title="Clear all">
+				  <i class="material-icons">delete</i>
+				</button>
+				<button id="enterLineBtn" title="New line">
+					<i class="material-icons">keyboard_return</i>
+				  </button>
+					<button id="toggleSoundBtn" class="sound-active" title="Sound On/Off">
+					<i class="material-icons">volume_up</i>
+				  </button>
+			  </div>
+			<!-- Color Chart Box (bottom-right) -->
+			<div class="color-chart-box" id="colorChartBox">
+			  <!-- Fila 1: 1-7 -->
+			  <div class="chart-row">
+				<img src="CC/CC-01.png" class="chart-icon" data-sound="1">
+				<img src="CC/CC-02.png" class="chart-icon" data-sound="2">
+				<img src="CC/CC-03.png" class="chart-icon" data-sound="3">
+				<img src="CC/CC-04.png" class="chart-icon" data-sound="4">
+				<img src="CC/CC-05.png" class="chart-icon" data-sound="5">
+				<img src="CC/CC-06.png" class="chart-icon" data-sound="6">
+				<img src="CC/CC-07.png" class="chart-icon" data-sound="7">
+			  </div>
+
+			  <!-- Fila 2: 8-14 -->
+			  <div class="chart-row">
+				<img src="CC/CC-08.png" class="chart-icon" data-sound="8">
+				<img src="CC/CC-09.png" class="chart-icon" data-sound="9">
+				<img src="CC/CC-10.png" class="chart-icon" data-sound="10">
+				<img src="CC/CC-11.png" class="chart-icon" data-sound="11">
+				<img src="CC/CC-12.png" class="chart-icon" data-sound="12">
+				<img src="CC/CC-13.png" class="chart-icon" data-sound="13">
+				<img src="CC/CC-14.png" class="chart-icon" data-sound="14">
+			  </div>
+
+			  <!-- Fila 3: 15-19 -->
+			  <div class="chart-row">
+				<img src="CC/CC-15.png" class="chart-icon" data-sound="15">
+				<img src="CC/CC-16.png" class="chart-icon" data-sound="16">
+				<img src="CC/CC-17.png" class="chart-icon" data-sound="17">
+				<img src="CC/CC-18.png" class="chart-icon" data-sound="18">
+				<img src="CC/CC-19.png" class="chart-icon" data-sound="19">
+			  </div>
+
+			  <!-- Fila 4: 20-23 -->
+			  <div class="chart-row">
+				<img src="CC/CC-20.png" class="chart-icon" data-sound="20">
+				<img src="CC/CC-21.png" class="chart-icon" data-sound="21">
+				<img src="CC/CC-22.png" class="chart-icon" data-sound="22">
+				<img src="CC/CC-23.png" class="chart-icon" data-sound="23">
+			  </div>
+
+			  <!-- Fila 5+: 24-58 en bloques de 7 -->
+			  <div class="chart-row">
+				<img src="CC/CC-24.png" class="chart-icon" data-sound="24">
+				<img src="CC/CC-25.png" class="chart-icon" data-sound="25">
+				<img src="CC/CC-26.png" class="chart-icon" data-sound="26">
+				<img src="CC/CC-27.png" class="chart-icon" data-sound="27">
+				<img src="CC/CC-28.png" class="chart-icon" data-sound="28">
+				<img src="CC/CC-29.png" class="chart-icon" data-sound="29">
+				<img src="CC/CC-30.png" class="chart-icon" data-sound="30">
+			  </div>
+			  <div class="chart-row">
+				<img src="CC/CC-31.png" class="chart-icon" data-sound="31">
+				<img src="CC/CC-32.png" class="chart-icon" data-sound="32">
+				<img src="CC/CC-33.png" class="chart-icon" data-sound="33">
+				<img src="CC/CC-34.png" class="chart-icon" data-sound="34">
+				<img src="CC/CC-35.png" class="chart-icon" data-sound="35">
+				<img src="CC/CC-36.png" class="chart-icon" data-sound="36">
+				<img src="CC/CC-37.png" class="chart-icon" data-sound="37">
+			  </div>
+			  <div class="chart-row">
+				<img src="CC/CC-38.png" class="chart-icon" data-sound="38">
+				<img src="CC/CC-39.png" class="chart-icon" data-sound="39">
+				<img src="CC/CC-40.png" class="chart-icon" data-sound="40">
+				<img src="CC/CC-41.png" class="chart-icon" data-sound="41">
+				<img src="CC/CC-42.png" class="chart-icon" data-sound="42">
+				<img src="CC/CC-43.png" class="chart-icon" data-sound="43">
+				<img src="CC/CC-44.png" class="chart-icon" data-sound="44">
+			  </div>
+			  <div class="chart-row">
+				<img src="CC/CC-45.png" class="chart-icon" data-sound="45">
+				<img src="CC/CC-46.png" class="chart-icon" data-sound="46">
+				<img src="CC/CC-47.png" class="chart-icon" data-sound="47">
+				<img src="CC/CC-48.png" class="chart-icon" data-sound="48">
+				<img src="CC/CC-49.png" class="chart-icon" data-sound="49">
+				<img src="CC/CC-50.png" class="chart-icon" data-sound="50">
+				<img src="CC/CC-51.png" class="chart-icon" data-sound="51">
+			  </div>
+			  <div class="chart-row">
+				<img src="CC/CC-52.png" class="chart-icon" data-sound="52">
+				<img src="CC/CC-53.png" class="chart-icon" data-sound="53">
+				<img src="CC/CC-54.png" class="chart-icon" data-sound="54">
+				<img src="CC/CC-55.png" class="chart-icon" data-sound="55">
+				<img src="CC/CC-56.png" class="chart-icon" data-sound="56">
+				<img src="CC/CC-57.png" class="chart-icon" data-sound="57">
+				<img src="CC/CC-58.png" class="chart-icon" data-sound="58">
+			  </div>
+			</div>
+
+			</div>
+		  </div>
+		</div>
+
+		  
+		<!-- WHITEBOARD -->
+		<div id="whiteboardContent" style="display: none; width: 100%; height: 100%;">
+		  <div class="whiteboard-toolbar">
+			<label for="colorPicker">Color:</label>
+			<input type="color" id="colorPicker" value="#000000">
+
+			<label for="brushSize">Brush size:</label>
+			<input type="range" id="brushSize" min="1" max="20" value="5">
+
+			<button id="clearBoard">Clear</button>
+		  </div>
+
+		  <canvas id="whiteboardCanvas"></canvas>
+		</div>
+		  
+        <!-- Arrows -->
+        <div class="arrows">
+          <button class="arrow up"><i class="material-icons">keyboard_arrow_up</i></button>
+          <button class="arrow down"><i class="material-icons">keyboard_arrow_down</i></button>
+        </div>
+      </div>
+    </main>
+
+	<!-- Breadcrumb + Logout -->
+	<div class="top-right-container">
+		<a href="../../index.html" class="breadcrumb-link">
+		  <div class="breadcrumb">
+			<i class="fa-solid fa-house"></i>
+			<span>&gt; Level 4 &gt; Lesson 1</span>
+		  </div>
+		</a>
+	  <button class="logout" onclick="window.location.href='../../login.html'">
+		  <i class="fa-solid fa-right-from-bracket"></i> Logout
+		</button>
+	</div>
+	  
+  </div>
+	<script src="scripts.js"></script>
+	<script src="whiteboard.js"></script>
+	<script src="colorchart.js"></script>
+</body>
+</html>

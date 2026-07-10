@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Interactivo</title>
+
+  <link rel="stylesheet" href="colorchart.css">
+
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .top-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 35px;
+      margin: -120px 0 0 0;
+      min-height: 520px;
+    }
+
+    .selected-letter {
+      font-size: 180px;
+      font-weight: bold;
+      color: black;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 180px;
+    }
+
+    .circles-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 170px;
+    }
+
+    .circle {
+      border: 2px solid gray;
+      box-sizing: border-box;
+    }
+
+    .circle.revealed {
+      border: 2px solid transparent;
+    }
+
+    #circle1,
+    #circle2 {
+      width: 120px;
+      height: 120px;
+      max-width: 120px;
+      flex: 0 0 140px;
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      background-color: white;
+      padding: 15px 20px;
+      border-radius: 15px;
+      border: 2px solid #e6f0ff;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #007bff;
+      background-color: #e6f0ff;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .thumbnail.active {
+      background-color: #007bff;
+      color: #e6f0ff;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-display">
+    <div class="selected-letter" id="selectedLetter">b</div>
+
+    <div class="circles-row">
+      <div class="circle" id="circle1" onclick="toggleReveal(this, 0)">
+        <img src="CC/CC-41.png" id="image1" alt="Imagen 1">
+      </div>
+
+      <div class="circle" id="circle2" onclick="toggleReveal(this, 1)">
+        <img src="CC/CC-11.png" id="image2" alt="Imagen 2">
+      </div>
+    </div>
+  </div>
+
+  <div class="thumbnails">
+    <div class="thumbnail active" onclick="changeLetter('b', ['CC-41.png', 'CC-11.png'], this)">b</div>
+    <div class="thumbnail" onclick="changeLetter('c', ['CC-27.png', 'CC-11.png'], this)">c</div>
+    <div class="thumbnail" onclick="changeLetter('d', ['CC-33.png', 'CC-11.png'], this)">d</div>
+    <div class="thumbnail" onclick="changeLetter('g', ['CC-49.png', 'CC-11.png'], this)">g</div>
+    <div class="thumbnail" onclick="changeLetter('v', ['CC-32.png', 'CC-11.png'], this)">v</div>
+  </div>
+
+  <script>
+    let currentImages = ['CC-41.png', 'CC-11.png'];
+
+    function changeLetter(letter, images, el) {
+      const selectedLetter = document.getElementById('selectedLetter');
+      const circle1 = document.getElementById('circle1');
+      const circle2 = document.getElementById('circle2');
+      const image1 = document.getElementById('image1');
+      const image2 = document.getElementById('image2');
+
+      // Primero ocultar ambos círculos
+      circle1.classList.remove('revealed');
+      circle2.classList.remove('revealed');
+
+      // Cambiar letra activa
+      selectedLetter.textContent = letter;
+      currentImages = images;
+
+      // Cambiar botón activo
+      document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+
+      // Esperar un poco para evitar que se vea un flash de la imagen anterior
+      setTimeout(() => {
+        image1.src = 'CC/' + currentImages[0];
+        image2.src = 'CC/' + currentImages[1];
+      }, 240);
+    }
+
+	function toggleReveal(el, index) {
+	  const circle1 = document.getElementById('circle1');
+	  const circle2 = document.getElementById('circle2');
+
+	  // ===== REVELAR =====
+	  // No permitir abrir el segundo si el primero no está abierto
+	  if (index === 1 && !circle1.classList.contains('revealed')) {
+		return;
+	  }
+
+	  // ===== OCULTAR =====
+	  // No permitir cerrar el primero si el segundo sigue abierto
+	  if (index === 0 && circle2.classList.contains('revealed')) {
+		return;
+	  }
+
+	  el.classList.toggle('revealed');
+	}
+  </script>
+
+</body>
+</html>

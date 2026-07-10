@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Interactivo</title>
+
+  <link rel="stylesheet" href="colorchart.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .top-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 35px;
+      margin: -120px 0 0 0;
+      min-height: 520px;
+    }
+
+    .selected-letter {
+      font-size: 180px;
+      font-weight: bold;
+      color: black;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 180px;
+    }
+
+    .circles-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 170px;
+    }
+
+.circle {
+  border: 2px solid gray;
+  box-sizing: border-box;
+  width: 120px;
+  height: 120px;
+  max-width: 120px;
+  min-width: 120px;
+  flex: 0 0 140px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+	  .circle img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+    .circle.revealed {
+      border: 2px solid transparent;
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      background-color: white;
+      padding: 15px 20px;
+      border-radius: 15px;
+      border: 2px solid #e6f0ff;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #007bff;
+      background-color: #e6f0ff;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .thumbnail.active {
+      background-color: #007bff;
+      color: #e6f0ff;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    /* Solo para la W: que quepan 5 círculos sin romper el estilo */
+    .circles-row.five-circles {
+      gap: 10px;
+    }
+
+.circles-row.five-circles .circle {
+  width: 110px;
+  height: 110px;
+  max-width: 110px;
+  min-width: 110px;
+  flex: 0 0 110px;
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="top-display">
+    <div class="selected-letter" id="selectedLetter">j</div>
+
+    <div class="circles-row" id="circlesContainer"></div>
+  </div>
+
+  <div class="thumbnails">
+    <div class="thumbnail active" onclick="changeLetter('j', ['CC-49.png', 'CC-16.png'], this)">j</div>
+    <div class="thumbnail" onclick="changeLetter('k', ['CC-39.png', 'CC-16.png'], this)">k</div>
+    <div class="thumbnail" onclick="changeLetter('q', ['CC-39.png', 'CC-18.png'], this)">q</div>
+    <div class="thumbnail" onclick="changeLetter('w', ['CC-33.png', 'CC-02.png', 'CC-41.png', 'CC-47.png', 'CC-18.png'], this)">w</div>
+    <div class="thumbnail" onclick="changeLetter('x', ['CC-04.png', 'CC-51.png'], this)">x</div>
+    <div class="thumbnail" onclick="changeLetter('z', ['CC-26.png', 'CC-11.png'], this)">z</div>
+  </div>
+
+  <script>
+    let currentImages = ['CC-49.png', 'CC-16.png'];
+    let revealedState = [];
+
+    function createCircles(images) {
+      const container = document.getElementById('circlesContainer');
+      container.innerHTML = '';
+      container.classList.remove('five-circles');
+
+      if (images.length === 5) {
+        container.classList.add('five-circles');
+      }
+
+      revealedState = new Array(images.length).fill(false);
+
+      images.forEach((img, index) => {
+        const circle = document.createElement('div');
+        circle.className = 'circle';
+        circle.onclick = () => toggleReveal(circle, index);
+
+        const image = document.createElement('img');
+        image.src = 'CC/' + img;
+        image.alt = 'Imagen ' + (index + 1);
+
+        circle.appendChild(image);
+        container.appendChild(circle);
+      });
+    }
+
+    function changeLetter(letter, images, el) {
+      const selectedLetter = document.getElementById('selectedLetter');
+
+      selectedLetter.textContent = letter;
+      currentImages = images;
+
+      document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+
+      createCircles(images);
+    }
+
+    function toggleReveal(el, index) {
+      const circles = document.querySelectorAll('#circlesContainer .circle');
+
+      // No abrir uno si el anterior no está abierto
+      if (index > 0 && !revealedState[index - 1]) {
+        return;
+      }
+
+      // No cerrar uno si el siguiente sigue abierto
+      if (index < revealedState.length - 1 && revealedState[index + 1]) {
+        return;
+      }
+
+      revealedState[index] = !revealedState[index];
+      el.classList.toggle('revealed');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createCircles(currentImages);
+    });
+  </script>
+
+</body>
+</html>

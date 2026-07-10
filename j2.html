@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shuffle + Popup Vowels</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+	.main-wrapper {
+	  width: 100%;
+	  height: 100vh;
+	  position: relative;
+	}
+
+.shuffle-btn {
+  width: 120px;
+  height: 70px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  bottom: -106px;
+  transform: translateX(-50%);
+  z-index: 5;
+  background-color: #00c400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.shuffle-btn i {
+  font-size: 26px;
+  color: white;
+}
+
+.shuffle-btn:hover {
+  transform: translateX(-50%) scale(1.04);
+}
+
+.shuffle-btn:active {
+  transform: translateX(-50%) scale(0.96);
+  background-color: #009e00;
+}
+
+.shuffle-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.shuffle-btn::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 10%;
+  width: 80%;
+  height: 30%;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.25);
+  filter: blur(2px);
+}
+
+    /* Popup estilo base tomado de conversacion1.html */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-box {
+      width: 90vw;
+      max-width: 1100px;
+      height: 85vh;
+      background: #ffffff;
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 50%;
+      background: #e53935;
+      color: #ffffff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .popup-close:hover {
+      background: #c62828;
+    }
+
+    .popup-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-letter {
+      font-size: 160px;
+      font-weight: bold;
+      color: black;
+      line-height: 1;
+      margin-bottom: 40px;
+    }
+
+    .popup-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 30px 0 50px 0;
+    }
+	.popup-circles-row {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  gap: 10px;
+	  margin-bottom: 20px;
+	}
+    .popup-circle:hover {
+      transform: scale(1.08);
+    }
+
+    .popup-circle img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .popup-circle.revealed img {
+      opacity: 1;
+    }
+
+    .popup-circle.revealed {
+      background-color: transparent;
+      border: 2px solid transparent;
+    }
+
+    /* Bocina estilo tomado de english.html */
+    .group-center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btnCC {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 15%;
+      min-width: 110px;
+    }
+
+    .btnCC:hover {
+      background-color: #1976d2;
+    }
+
+    .btnCC i {
+      font-size: 20px;
+    }
+.main-wrapper {
+  width: 680px;
+  height: 360px;
+  position: relative;
+}
+
+.slot-machine {
+  width: 680px;
+  height: 360px;
+  position: relative;
+  background: url("images/jackpot5.png") center / 100% 100% no-repeat;
+}
+
+.reels-row {
+  position: absolute;
+  left: 32px;
+  top: 115px;
+  width: 615px;
+  height: 138px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reel {
+  width: 112px;
+  height: 126px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.reel-letter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  font-size: 96px;
+  text-transform: lowercase;
+  user-select: none;
+  z-index: 4;
+  transform: translateY(4px);
+  transition: transform 0.2s ease;
+}
+
+.reel:hover .reel-letter {
+  transform: scale(1.15);
+}
+
+.reel-spin {
+  position: absolute;
+  inset: 0;
+  background: url("images/ab.gif") center center / 60% no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.reel.spinning .reel-spin {
+  opacity: 0.3;
+}
+
+.reel.spinning .reel-letter {
+  opacity: 0;
+}
+  </style>
+</head>
+<body>
+
+	<div class="main-wrapper">
+	  <div class="slot-machine">
+		<div class="reels-row" id="reelsRow"></div>
+
+		<button class="shuffle-btn" id="shuffleBtn" aria-label="Girar slot">
+		  <i class="fa-solid fa-rotate"></i>
+		</button>
+	  </div>
+	</div>
+
+  <!-- POPUP -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-box">
+      <button class="popup-close" id="popupClose">&times;</button>
+
+		<div class="popup-content">
+		  <div class="popup-letter" id="popupLetter">m</div>
+
+		  <div class="popup-circles-row">
+			<div class="popup-circle" id="popupCircle1" onclick="togglePopupCircle(0)">
+			  <img src="CC/CC-04.png" id="popupImage1" alt="Popup image 1">
+			</div>
+
+			<div class="popup-circle" id="popupCircle2" onclick="togglePopupCircle(1)">
+			  <img src="CC/CC-29.png" id="popupImage2" alt="Popup image 2">
+			</div>
+		  </div>
+
+		  <div class="group-center">
+			<button class="btnCC" onclick="playPopupAudio()">
+			  <i class="fas fa-volume-up"></i>
+			</button>
+		  </div>
+		</div>
+    </div>
+  </div>
+
+<script>
+const sequences = [
+  ["m", "s", "t", "l", "n"],
+  ["s", "m", "i", "l", "e"],
+  ["s", "n", "a", "i", "l"],
+  ["l", "e", "a", "s", "t"]
+];
+
+const popupData = {
+  m: { images: ["CC/CC-04.png", "CC/CC-29.png"], audio: "audios/m.mp3" },
+  s: { images: ["CC/CC-04.png", "CC/CC-27.png"], audio: "audios/s.mp3" },
+  t: { images: ["CC/CC-25.png", "CC/CC-11.png"], audio: "audios/t.mp3" },
+  l: { images: ["CC/CC-04.png", "CC/CC-37.png"], audio: "audios/l.mp3" },
+  n: { images: ["CC/CC-04.png", "CC/CC-30.png"], audio: "audios/n.mp3" },
+  a: { images: ["CC/CC-16.png"], audio: "audios/a.mp3" },
+  e: { images: ["CC/CC-11.png"], audio: "audios/e.mp3" },
+  i: { images: ["CC/CC-15.png"], audio: "audios/i.mp3" }
+};
+
+let sequenceIndex = 0;
+let currentOrder = [...sequences[0]];
+let isAnimating = false;
+let currentPopupLetter = "m";
+let popupRevealState = [false, false];
+
+const reelsRow = document.getElementById("reelsRow");
+const shuffleBtn = document.getElementById("shuffleBtn");
+
+const popupOverlay = document.getElementById("popupOverlay");
+const popupClose = document.getElementById("popupClose");
+const popupLetter = document.getElementById("popupLetter");
+const popupCircle1 = document.getElementById("popupCircle1");
+const popupCircle2 = document.getElementById("popupCircle2");
+const popupImage1 = document.getElementById("popupImage1");
+const popupImage2 = document.getElementById("popupImage2");
+
+const spinSound = new Audio("audios/slotmachine2.mp3");
+const stopSound = new Audio("audios/slotmachine1.mp3");
+spinSound.volume = 0.5;
+stopSound.volume = 1;
+
+function createReels() {
+  reelsRow.innerHTML = "";
+
+  currentOrder.forEach((letter) => {
+    const reel = document.createElement("div");
+    reel.className = "reel";
+    reel.dataset.letter = letter;
+
+    const spinLayer = document.createElement("div");
+    spinLayer.className = "reel-spin";
+
+    const letterLayer = document.createElement("div");
+    letterLayer.className = "reel-letter";
+    letterLayer.textContent = letter;
+
+    reel.appendChild(spinLayer);
+    reel.appendChild(letterLayer);
+
+    reel.addEventListener("click", () => {
+      if (!isAnimating) {
+        openPopup(reel.dataset.letter);
+      }
+    });
+
+    reelsRow.appendChild(reel);
+  });
+}
+
+function updateFinalLetters(order) {
+  const reels = [...document.querySelectorAll(".reel")];
+
+  reels.forEach((reel, index) => {
+    const letter = order[index];
+    reel.dataset.letter = letter;
+    reel.querySelector(".reel-letter").textContent = letter;
+  });
+
+  currentOrder = [...order];
+}
+
+function setSpinningState(active) {
+  const reels = [...document.querySelectorAll(".reel")];
+
+  if (active) {
+    spinSound.currentTime = 0;
+    spinSound.loop = true;
+    spinSound.play();
+
+    reels.forEach((reel, index) => {
+      const spinLayer = reel.querySelector(".reel-spin");
+      const gif = index % 2 === 0 ? "images/ab.gif" : "images/ba.gif";
+      spinLayer.style.background = `url("${gif}") center center / 60% no-repeat`;
+    });
+  } else {
+    spinSound.pause();
+    spinSound.currentTime = 0;
+    stopSound.currentTime = 0;
+    stopSound.play();
+  }
+
+  reels.forEach(reel => {
+    reel.classList.toggle("spinning", active);
+  });
+}
+
+async function animateShuffle(targetOrder) {
+  if (isAnimating) return;
+
+  isAnimating = true;
+  shuffleBtn.disabled = true;
+
+  setSpinningState(true);
+
+  await wait(1500);
+
+  setSpinningState(false);
+  updateFinalLetters(targetOrder);
+
+  shuffleBtn.disabled = false;
+  isAnimating = false;
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+shuffleBtn.addEventListener("click", async () => {
+  if (isAnimating) return;
+
+  if (sequenceIndex === 0) {
+    sequenceIndex = 1;
+  } else if (sequenceIndex === 1) {
+    sequenceIndex = 2;
+  } else if (sequenceIndex === 2) {
+    sequenceIndex = 3;
+  } else {
+    sequenceIndex = 0;
+  }
+
+  await animateShuffle(sequences[sequenceIndex]);
+});
+
+function openPopup(letter) {
+  currentPopupLetter = letter;
+  popupLetter.textContent = letter;
+
+  const data = popupData[letter];
+
+  popupImage1.src = data.images[0];
+  popupCircle1.classList.remove("revealed");
+  popupCircle1.style.display = "flex";
+
+  if (data.images.length > 1) {
+    popupImage2.src = data.images[1];
+    popupCircle2.classList.remove("revealed");
+    popupCircle2.style.display = "flex";
+  } else {
+    popupCircle2.classList.remove("revealed");
+    popupCircle2.style.display = "none";
+  }
+
+  popupRevealState = [false, false];
+  popupOverlay.classList.add("active");
+}
+
+function closePopup() {
+  popupOverlay.classList.remove("active");
+  popupCircle1.classList.remove("revealed");
+  popupCircle2.classList.remove("revealed");
+  popupCircle1.style.display = "flex";
+  popupCircle2.style.display = "flex";
+  popupRevealState = [false, false];
+}
+
+function togglePopupCircle(index) {
+  const circles = [popupCircle1, popupCircle2];
+  const hasSecondCircle = popupCircle2.style.display !== "none";
+
+  if (index === 1 && !hasSecondCircle) return;
+  if (index === 1 && !popupRevealState[0]) return;
+  if (index === 0 && hasSecondCircle && popupRevealState[1]) return;
+
+  popupRevealState[index] = !popupRevealState[index];
+  circles[index].classList.toggle("revealed");
+}
+
+function playPopupAudio() {
+  const audio = new Audio(popupData[currentPopupLetter].audio);
+  audio.play();
+}
+
+popupClose.addEventListener("click", closePopup);
+
+popupOverlay.addEventListener("click", (e) => {
+  if (e.target === popupOverlay) {
+    closePopup();
+  }
+});
+
+createReels();
+setSpinningState(true);
+setSpinningState(false);
+
+document.querySelectorAll(".reel-spin").forEach((el, index) => {
+  const gif = index % 2 === 0 ? "images/ab.gif" : "images/ba.gif";
+  el.style.background = `url("${gif}") center center / 60% no-repeat`;
+});
+</script>
+
+</body>
+</html>

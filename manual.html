@@ -1,0 +1,3033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1, Lesson 1</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+		body {
+			margin: 60px 10px;
+			display: flex;
+			align-items: flex-start;
+			justify-content: center;
+			min-height: 100vh;
+			height: auto;
+			background: #f4f4f4;
+		}
+		.header-bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 40px; /* Ajusta según sea necesario */
+			background-color: #1e3a8a; /* Azul oscuro */
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			z-index: 1000;
+		}
+
+		.header-bar img {
+			height: 28px;
+		}
+
+		.header-bar .header-text {
+			color: white;
+			font-size: 14px;
+		}
+
+        .wrapper {
+			margin: 60px;
+            background: #fff;
+            padding: 5px 30px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px;
+			min-height: 900px;
+        }
+		.container {
+			width: 100%;
+			min-height: 0;
+			position: relative;
+			overflow-x: hidden;
+			max-width: 1140px;
+		}
+        .content {
+			width: 1200px;
+			max-width: 1140px;
+            padding: 10px 0;
+        }
+		.content-box {
+			position: absolute;
+			transition: 0.3s ease;
+			display: flex;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+		h1, h2 {
+			color: #293a7b;
+		}		
+		h3{
+			color: #293a7b;
+			font-size: 15px;
+		}
+		p {
+			color: #595959;
+		}
+        input[type="radio"] {
+            display: none;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            padding: 8px 0;
+			font-size: 14px;
+        }
+        nav::after {
+            position: absolute;
+            content: "";
+            background: #e7e7e7;
+            width: 100%;
+            height: 1px;
+            top: 62px;
+            z-index: 0;
+        }
+        nav::before {
+            position: absolute;
+            content: "";
+            background: #293a7b;
+            width: 20%;
+            height: 5px;
+            top: 58px;
+            left: 0;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+            transition: 0.3s;
+        }
+        nav label {
+            position: relative;
+            cursor: pointer;
+            width: 25%;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 500;
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+		nav label i {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        nav label::after {
+            position: absolute;
+            content: "";
+            background: #89acd9;
+            display: block;
+            padding-top: 200%;
+            padding-left: 350%;
+            margin-top: -100%;
+            opacity: 0;
+            transition: all 0.9s;
+        }
+        nav label:active::after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+
+		#daily:checked ~ nav::before { left: 0; }
+		#steps:checked ~ nav::before { left: 20%; }
+		#seg1:checked ~ nav::before { left: 40%; }
+		#seg2:checked ~ nav::before { left: 60%; }
+		#seg3:checked ~ nav::before { left: 80%; }
+
+		#daily:checked ~ .container .content-box { left: 0; }
+		#steps:checked ~ .container .content-box { left: -100%; }
+		#seg1:checked ~ .container .content-box { left: -200%; }
+		#seg2:checked ~ .container .content-box { left: -300%; }
+		#seg3:checked ~ .container .content-box { left: -400%; }
+
+		#daily:checked ~ nav label:nth-child(1),
+		#steps:checked ~ nav label:nth-child(2),
+		#seg1:checked ~ nav label:nth-child(3),
+		#seg2:checked ~ nav label:nth-child(4),
+		#seg3:checked ~ nav label:nth-child(5) {
+			color: #293a7b;
+		}
+        ::selection {
+            background: #293a7b;
+            color: #fff;
+        }
+        .accordion {
+            display: flex;
+			max-width: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 0px 0px;
+        }
+        .accordion .accordion-text {
+            width: 100%;
+        }
+        .accordion .accordion-text .title {
+            font-size: 35px;
+            font-weight: 500;
+            color: #065fd4;
+        }
+        .accordion .accordion-text .faq-text {
+            margin-top: 25px;
+            min-height: 500px;
+            overflow-y: auto;
+        }
+        .faq-text::-webkit-scrollbar {
+            display: none;
+        }
+        .accordion .accordion-text li {
+            list-style: none;
+            cursor: pointer;
+        }
+        .accordion-text li .question-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .accordion-text li .question-arrow .question {
+            font-size: 15px;
+            font-weight: 500;
+            color: #595959;
+            transition: all 0.3s ease;
+        }
+        .accordion-text li .question-arrow .arrow {
+            font-size: 20px;
+            color: #595959;
+            transition: all 0.3s ease;
+        }
+        .accordion-text li.showAnswer .question-arrow .arrow {
+            transform: rotate(-180deg);
+        }
+        .accordion-text li:hover .question-arrow .question,
+        .accordion-text li:hover .question-arrow .arrow {
+            color: #065fd4;
+        }
+        .accordion-text li.showAnswer .question-arrow .question,
+        .accordion-text li.showAnswer .question-arrow .arrow {
+            color: #065fd4;
+        }
+      	.accordion-text li .line {
+            display: block;
+            height: 1px;
+            width: 100%;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .accordion-text li p {
+            width: 92%;
+            font-size: 15px;
+            font-weight: 500;
+            color: #595959;
+            display: none;
+			margin-bottom: 20px;
+			padding: 0 0 10px 20px;
+        }
+        .accordion-text li.showAnswer p {
+            display: block;
+        }
+		.steps-list {
+			list-style-type: decimal;
+			padding-left: 20px;
+		}
+		.steps-list li {
+			margin-bottom: 0px;
+		}
+		.steps-list p {
+			margin: 0;
+			padding-left: 20px;
+			font-size: 15px;
+			font-weight: 500;
+			color: #595959;
+			text-indent: -20px;
+		}
+		.indented-paragraph {
+			text-indent: 0px;
+			margin-left: 20px;
+			margin-right: 0;
+		} 
+		table {
+            width: 98%;
+            max-width: 1000px;
+			margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #293a7b;
+            font-size: 18px;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #293a7b;
+        }
+
+        /* Ajustes específicos para la segunda tabla */
+        .tabla-vocabulario td:nth-child(1) {
+            width: 15%; /* Ajustar ancho de la primera columna */
+        }
+        .tabla-vocabulario td:nth-child(2) {
+            width: 30%; /* Ajustar ancho de la segunda columna */
+        }
+        .tabla-vocabulario td:nth-child(3) {
+            width: 55%; /* Ajustar ancho de la tercera columna */
+        }
+		
+		/* Ajustes específicos para la segunda tabla */
+        .tabla-vocabulario2 td:nth-child(1) {
+            width: 15%; /* Ajustar ancho de la primera columna */
+        }
+        .tabla-vocabulario2 td:nth-child(2) {
+            width: 85%; /* Ajustar ancho de la segunda columna */
+        }
+		i.fas.fa-image {
+			font-size: 1em;
+			vertical-align: middle;
+			margin-right: 5px;
+			color: #0174b1;
+		}
+		.example-image {
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+			max-width: 1000px;
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+		/* Estilos de Accordion */
+        .accordion2 {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 8px;
+			color: #595959;	
+        }
+        .accordion-item2 {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;z
+			text-decoration: none; /* Elimina el subrayado del texto */
+			border: none; /* Asegúrate de que no haya bordes */
+        }
+        .accordion-header2 {
+            background-color: #e9f8ff;
+            color: #293a7b;
+            cursor: pointer;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .accordion-content2 {
+            display: none;
+            padding: 15px;
+            background-color: #fff;
+        }
+        .accordion-header2 i {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.active2 i {
+            transform: rotate(180deg);
+        }
+		.header-container {
+		  display: flex; /* Hace que los hijos del contenedor se alineen en una fila */
+		  justify-content: space-between;
+		  align-items: center;
+		  width: 100%;
+		  margin: 20px 0;
+		}
+		.header-container h1 {
+		  margin: 0px; /* Elimina márgenes predeterminados */
+		  padding: 0; /* Elimina rellenos predeterminados */
+		}
+		  .iconcc {
+            height: 24px;
+        }
+		.highlight2 {
+            position: relative;
+            top: -6px;
+        }
+.accordion-text .answer {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.accordion-text li.showAnswer .answer {
+    display: block;
+}
+
+.accordion-text .answer table,
+.accordion-text .answer img {
+    max-width: 100%;
+}
+		
+	.iconcc2 {
+	  height: 30px;
+	  width: auto;
+	  vertical-align: middle;
+	}
+		
+		/* DAILY ADVANCE */
+.daily-advance {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.daily-subtitle {
+    margin: 65px 0 10px 32px;
+    color: #293a7b;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.daily-weeks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 38px 34px;
+    padding: 0 32px;
+}
+
+.daily-week {
+    min-width: 0;
+}
+
+.daily-week h3 {
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 14px;
+    color: #293a7b;
+}
+
+.daily-table {
+    width: 100% !important;
+    max-width: none !important;
+    table-layout: fixed;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.daily-table th,
+.daily-table td {
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    vertical-align: middle;
+}
+
+.daily-table th:last-child,
+.daily-table td:last-child {
+    border-right: none;
+}
+
+.daily-table th {
+    text-align: center;
+    font-size: 18px;
+    padding: 18px 12px;
+}
+
+.daily-table td {
+    font-size: 15px;
+    padding: 17px 18px;
+}
+
+.daily-table th:nth-child(1),
+.daily-table td:nth-child(1) {
+    width: 34%;
+}
+
+.daily-table th:nth-child(2),
+.daily-table td:nth-child(2),
+.daily-table th:nth-child(3),
+.daily-table td:nth-child(3) {
+    width: 33%;
+    text-align: center;
+}
+
+.daily-day {
+    text-align: left !important;
+    line-height: 1.25;
+}
+
+.daily-day strong {
+    color: #222222;
+}
+
+.daily-notes {
+    margin: 16px 32px 0;
+}
+
+.daily-notes h3 {
+    margin: 16px 0 12px;
+    color: #293a7b;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.daily-notes p {
+    margin: 0 0 14px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #333333;
+}
+
+.daily-notes strong {
+    color: #222222;
+}
+
+@media (max-width: 900px) {
+    .daily-subtitle {
+        margin: 35px 0 10px;
+    }
+
+    .daily-weeks-grid {
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 35px;
+    }
+
+    .daily-notes {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .daily-week h3 {
+        font-size: 26px;
+    }
+
+    .daily-table th {
+        font-size: 12px;
+        padding: 12px 6px;
+    }
+
+    .daily-table td {
+        font-size: 10px;
+        padding: 12px 7px;
+    }
+
+    .daily-table th:nth-child(1),
+    .daily-table td:nth-child(1) {
+        width: 40%;
+    }
+
+    .daily-table th:nth-child(2),
+    .daily-table td:nth-child(2),
+    .daily-table th:nth-child(3),
+    .daily-table td:nth-child(3) {
+        width: 30%;
+    }
+}
+		
+        /* Media Queries for Responsiveness */
+		@media (max-width: 1260px) {
+				body {
+					margin: 20px 10px;
+				}
+				.wrapper {
+					max-width: 960px; /*Medida de contenedor*/
+				}
+				nav {
+					font-size: 12px;
+				}
+				.container {
+					max-width: 900px;
+					width: 960px;
+				}
+				.content {
+					max-width: 900px;
+					width: 960px;
+				}
+				.accordion2 {
+					max-width: 960px;
+			  }
+				td {
+					font-size: 14px;
+				}
+			}
+        @media (max-width: 1024px) {
+			body {
+				margin: 20px 10px;
+			}
+			
+			.wrapper {
+				max-width: 840px; /*Medida de contenedor*/
+			}
+			.container {
+				max-width: 780px;
+				width: 840px;
+				margin-top: 20px;
+			}
+			.content {
+				max-width: 780px;
+				width: 840px;
+			}
+			.accordion2 {
+				max-width: 780px;
+      	 	}
+			nav {
+				flex-direction: column;
+				padding: 10px;
+			}
+				nav::after {
+					height: 0px;
+				}
+			nav::before {
+				width: 100%;
+				height: 3px;
+				top: 50px;
+				left: 0;
+			}
+            nav label {
+                width: 100%;
+                padding: 10px 0;
+                text-align: left;
+                border-bottom: 1px solid #e7e7e7;
+            }
+			/* Ajustes para mantener el indicador de navegación */
+			#daily:checked ~ nav::before {
+				left: 0;
+				top: 22%;
+			}
+
+			#steps:checked ~ nav::before {
+				left: 0;
+				top: 40%;
+			}
+
+			#seg1:checked ~ nav::before {
+				left: 0;
+				top: 58%;
+			}
+
+			#seg2:checked ~ nav::before {
+				left: 0;
+				top: 76%;
+			}
+
+			#seg3:checked ~ nav::before {
+				left: 0;
+				top: 94%;
+			}
+			th {
+				font-size: 16px;
+			}
+			td {
+				font-size: 14px;
+			}
+        }
+		@media (max-width: 900px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+            height: 20px;
+      		  }
+			.wrapper {
+				max-width: 720px; /*Medida de contenedor*/
+			}
+			.container {
+				max-width: 660px;
+				width: 720px;
+				margin-top: 20px;
+			}
+			.content {
+				max-width: 660px;
+				width: 720px;
+			}
+			.accordion2 {
+				max-width: 720px;
+      	  }
+			nav {
+				flex-direction: column;
+				padding: 10px;
+			}
+				nav::after {
+					height: 0px;
+				}
+			nav::before {
+				width: 100%;
+				height: 3px;
+				top: 50px;
+				left: 0;
+			}
+            nav label {
+                width: 100%;
+                padding: 10px 0;
+                text-align: left;
+                border-bottom: 1px solid #e7e7e7;
+            }
+			th {
+				font-size: 16px;
+			}
+			td {
+				font-size: 14px;
+			}
+        }
+		@media (max-width: 768px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+            	 height: 15px;
+			 }
+			h1 {
+				font-size: 20px;
+			}		
+			.wrapper {
+				max-width: 520px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 460px;
+				width: 520px;
+				
+			}
+			.content {
+				max-width: 460px;
+				width: 520px;
+			}
+			.accordion2 {
+				max-width: 520px;
+      	  }
+			td {
+				font-size: 11px;
+			}
+        }
+		@media (max-width: 576px) {
+			body {
+				margin: 20px 10px;
+			}
+			.wrapper {
+				max-width: 468px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 420px;
+				width: 468px;
+			}
+			.content {
+				max-width: 420px;
+				width: 468px;
+			}
+			.accordion2 {
+				max-width: 468px;
+      	  }
+			td {
+				font-size: 11px;
+			}
+        }
+		@media (max-width: 480px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+           	 height: 8px;
+      		}
+
+			.wrapper {
+				max-width: 330px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 290px;
+				width: 330px;
+			}
+			.content {
+				max-width: 290px;
+				width: 330px;
+			}
+			.accordion2 {
+				max-width: 330px;
+      	    }
+			table {
+            width: 100%;
+            max-width: 100px;
+       	 	}
+			td {
+				font-size: 10px;
+			}
+			th {
+				font-size: 12px;
+			}
+			td {
+				font-size: 10px;
+			}
+        }
+		
+		/* CORRECCIÓN RESPONSIVE DE PESTAÑAS */
+.container {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  position: relative;
+}
+
+.content-box {
+  width: 500% !important;
+  display: flex !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.content {
+  width: 20% !important;
+  max-width: 20% !important;
+  flex: 0 0 20% !important;
+  padding: 10px 0;
+  overflow: visible;
+}
+
+.accordion,
+.accordion-text,
+.faq-text,
+.accordion-text li,
+.accordion-text p,
+.steps-list,
+.steps-list li,
+.steps-list p {
+  max-width: 100%;
+}
+
+.accordion-text li p {
+  width: 100%;
+}
+
+table {
+  max-width: 100% !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+	</style>
+</head>
+
+<body>
+	<div class="header-bar">
+		<img src="images/Virtual_03_2.png" alt="Logo"> <!-- Reemplaza con la ruta del logo -->
+		<span class="header-text">Manuals <span style="font-size: 10px">▼</span></span>
+	</div>
+	<div class="wrapper">
+		<div class="header-container">
+  			<h1>LESSON 1 > To identify and say the letters of the English alphabet and produce their basic sounds.</h1>
+		</div>
+		<input type="radio" name="slider" id="daily" checked>
+		<input type="radio" name="slider" id="steps">
+		<input type="radio" name="slider" id="seg1">
+		<input type="radio" name="slider" id="seg2">
+		<input type="radio" name="slider" id="seg3">
+
+		<nav>
+			<label for="daily" class="daily">DAILY ADVANCE</label>
+			<label for="steps" class="steps">STEPS OF THE METHOD VOWELS</label>
+			<label for="seg1" class="seg1">STEPS OF THE METHOD CONSONANTS</label>
+			<label for="seg2" class="seg2">STEPS OF THE METHOD PHONICS</label>
+			<label for="seg3" class="seg3">EXTRA ACTIVITIES</label>
+		</nav>
+        <div class="container">
+            <div class="content-box">
+				<!-- DAILY ADVANCE -->
+				<div class="content">
+					<section class="daily-advance">
+
+						<h2>Daily Advance</h2>
+
+						<p class="daily-subtitle">Daily Lesson Schedule for SMART Courses</p>
+
+						<div class="daily-weeks-grid">
+
+							<!-- WEEK 1 -->
+							<section class="daily-week">
+								<h3>WEEK 1</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 1</strong><br>
+												(Group A)
+											</td>
+											<td>L1 and L2</td>
+											<td>L21 and L22</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 1</strong><br>
+												(Group B)
+											</td>
+											<td>L1 and L2</td>
+											<td>L21 and L22</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 1</strong><br>
+												(Group A)
+											</td>
+											<td>L3 and L4</td>
+											<td>L23 and L24</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 1</strong><br>
+												(Group B)
+											</td>
+											<td>L3 and L4</td>
+											<td>L23 and L24</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+							<!-- WEEK 2 -->
+							<section class="daily-week">
+								<h3>WEEK 2</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 2</strong><br>
+												(Group A)
+											</td>
+											<td>L5 and L6</td>
+											<td>L25 and L26</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 2</strong><br>
+												(Group B)
+											</td>
+											<td>L5 and L6</td>
+											<td>L25 and L26</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 2</strong><br>
+												(Group A)
+											</td>
+											<td>L7 and L8</td>
+											<td>L27 and L28</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 2</strong><br>
+												(Group B)
+											</td>
+											<td>L7 and L8</td>
+											<td>L27 and L28</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+							<!-- WEEK 3 -->
+							<section class="daily-week">
+								<h3>WEEK 3</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 3</strong><br>
+												(Group A)
+											</td>
+											<td>L9 and L10</td>
+											<td>L29 and L30</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 3</strong><br>
+												(Group B)
+											</td>
+											<td>L9 and L10</td>
+											<td>L29 and L30</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 3</strong><br>
+												(Group A)
+											</td>
+											<td>L11 and L12</td>
+											<td>L31 and L32</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 3</strong><br>
+												(Group B)
+											</td>
+											<td>L11 and L12</td>
+											<td>L31 and L32</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+							<!-- WEEK 4 -->
+							<section class="daily-week">
+								<h3>WEEK 4</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 4</strong><br>
+												(Group A)
+											</td>
+											<td>L13 and L14</td>
+											<td>L33 and L34</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 4</strong><br>
+												(Group B)
+											</td>
+											<td>L13 and L14</td>
+											<td>L33 and L34</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 4</strong><br>
+												(Group A)
+											</td>
+											<td>L15 and L16</td>
+											<td>L35 and L36</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 4</strong><br>
+												(Group B)
+											</td>
+											<td>L15 and L16</td>
+											<td>L35 and L36</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+						</div>
+
+						<div class="daily-notes">
+							<h3>Bonus Lessons</h3>
+
+							<p>
+								The platform includes 20 lessons per level. However, for the SMART
+								course, the last 4 lessons will be considered “Bonus Lessons” since
+								only 16 lessons can realistically be covered during each cycle due
+								to scheduling and time limitations. The Bonus Lessons are: Lessons
+								17–20 in Part A and Lessons 37–40 in Part B. These lessons should
+								NOT be taught in class during the SMART course. They are available
+								only as optional review material for students to study independently
+								on the platform if they choose to do so.
+							</p>
+
+							<h3>Holidays</h3>
+
+							<p>
+								Whenever there is a holiday during the cycle, the lesson taught on
+								the next class day must be the next lesson in the program.
+								<strong>NEVER SKIP ANY LESSONS!</strong> An additional class day
+								must be scheduled with the Branch Director to make up for the
+								holiday (usually on Fridays), since in the SMART course, all 16
+								scheduled lessons must be fully covered without exception.
+							</p>
+						</div>
+
+					</section>
+					<section class="daily-advance">
+
+						<p class="daily-subtitle">Daily Lesson Schedule for  V-SMART courses</p>
+
+						<div class="daily-weeks-grid">
+
+							<!-- WEEK 1 -->
+							<section class="daily-week">
+								<h3>WEEK 1</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 1</strong>
+											</td>
+											<td>L1</td>
+											<td>L21</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 1</strong>
+											</td>
+											<td>L2</td>
+											<td>L22</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 1</strong>
+											</td>
+											<td>L3</td>
+											<td>L23</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 1</strong>
+											</td>
+											<td>L4</td>
+											<td>L24</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Friday 1</strong>
+											</td>
+											<td>L5</td>
+											<td>L25</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+							<!-- WEEK 2 -->
+							<section class="daily-week">
+								<h3>WEEK 2</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 2</strong>
+											</td>
+											<td>L6</td>
+											<td>L26</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 2</strong>
+											</td>
+											<td>L7</td>
+											<td>L27</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 2</strong>
+											</td>
+											<td>L8</td>
+											<td>L28</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 2</strong>
+											</td>
+											<td>L9</td>
+											<td>L29</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Friday 2</strong>
+											</td>
+											<td>L10</td>
+											<td>L30</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+							<!-- WEEK 3 -->
+							<section class="daily-week">
+								<h3>WEEK 3</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 3</strong>
+											</td>
+											<td>L11</td>
+											<td>L31</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 3</strong>
+											</td>
+											<td>L12</td>
+											<td>L32</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 3</strong>
+											</td>
+											<td>L13</td>
+											<td>L33</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 3</strong>
+											</td>
+											<td>L14</td>
+											<td>L34</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Friday 3</strong>
+											</td>
+											<td>L15</td>
+											<td>L35</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+							<!-- WEEK 4 -->
+							<section class="daily-week">
+								<h3>WEEK 4</h3>
+
+								<table class="daily-table">
+									<thead>
+										<tr>
+											<th>DAY</th>
+											<th>PART A</th>
+											<th>PART B</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<td class="daily-day">
+												<strong>Monday 4</strong>
+											</td>
+											<td>L16</td>
+											<td>L36</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Tuesday 4</strong>
+											</td>
+											<td>L17</td>
+											<td>L37</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Wednesday 4</strong>
+											</td>
+											<td>L18</td>
+											<td>L38</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Thursday 4</strong>
+											</td>
+											<td>L19</td>
+											<td>L39</td>
+										</tr>
+
+										<tr>
+											<td class="daily-day">
+												<strong>Friday 4</strong>
+											</td>
+											<td>L20</td>
+											<td>L40</td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+
+						</div>
+
+						<div class="daily-notes">
+
+							<h3>Holidays</h3>
+
+							<p>
+								Whenever there is a holiday in the cycle, the lesson to teach the day after the holiday will be the next one in the program.
+								<strong>NEVER SKIP ANY LESSONS!</strong> At the end of the course, lessons 20 and 40 will not be taught.
+							</p>
+						</div>
+
+					</section>
+					
+				</div>
+				<!-- VOWELS -->
+                <div class="content">
+                    <h2>Vowels</h2><br>
+					<p><span class="highlight">Learning goals:</span> Students will learn the names of the letters in the English alphabet and be introduced to English as a non-phonetic language, as well as to phonics.</p>		
+                    <div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">                 
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Explain to your students that they will learn the English alphabet, including its 5 vowel letters and 21 consonant letters.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+									<span class="line"></span>
+									<p>You may explain the following:</p>
+									<p><i>As you all know, the color chart shows the sounds we use in English. Now we’re going to connect those sounds to written English. First, we’re going to learn the letters of the English alphabet. Do you know how many letters there are? (Let students guess.)</i></p>
+									<p><i>That’s right—there are 26 letters. The English alphabet has 5 vowel letters and 21 consonant letters. We’ll start with the vowels. I like to call them “open” letters because your mouth stays open when you pronounce them.</i></p>
+									<p><i>Now, let’s look at these letters and learn their names.</i></p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Teach the vowel letters. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<p>Explain to your students that they will learn the five vowel letters.</p>
+									<ol class="steps-list">
+										<li>
+											<p>a. Select the first letter (<b>a</b>) from the lower bar.</p>
+										</li>
+										<li>
+											<p>b. Click on the blank circle to reveal the color chart sound associated with the letter name.</p>
+										</li>
+										<li>
+											<p>c. Select a student and ask him/her to say the name of the letter at least twice. Reinforce the student’s participation by confirming the letter name.</p>
+										</li>
+										<li>
+											<p>d. Continue in the same fashion with different students until you have covered all five vowel letters. </p>
+										</li>
+									</ol>
+										<div class="answer">
+										<table style="width: 300px">
+										<tr>
+											<td style="text-align: center; font-size: 18px;"><b>a</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>e</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>i</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>o</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>u</b></td>
+										</tr>
+										<tr>
+											<td style="text-align: center;"><img src="CC/CC-16.png" alt="Image 03" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-11.png" alt="Image 03" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-15.png" alt="Image 03" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-17.png" alt="Image 03" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-18.png" alt="Image 03" class="iconcc"></td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 3. Help students review all the vowels randomly by saying the letter names.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Select a student and click on the button <img src="images/botonV.png" alt="Image 15" class="iconcc2" > to shuffle the letters.</p>
+										</li>
+										<li>
+											<p>b. Have the student pronounce each letter. If the pronunciation is correct, provide positive feedback. If the pronunciation is incorrect, follow the correction process: Click on the letter and have the student say the corresponding color chart sound to recall the letter name.</p>
+										</li>
+										<li>
+											<p>c. Repeat the same procedure with two more students for the remaining sets of letters.</p>
+										</li>
+									</ol>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<!-- CONSONANTS -->
+                <div class="content">
+                    <h2>Consonants</h2><br>
+					<p><span class="highlight">Learning goals:</span> Students will learn the names of the letters in the English alphabet and be introduced to English as a non-phonetic language, as well as to phonics.</p>		
+					<div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Explain to your students that they will now learn the consonant letters in English. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+									<span class="line"></span>
+									<p>You may explain the following:</p>
+									<p><i>Consonants are the other letters in the alphabet. They are different from vowels because your mouth is not completely open when you say them. Your lips, tongue, or teeth stop the air in some way. Most words use both vowels and consonants, and we need consonants to make clear and complete words.</i></p>
+									<p><i>Now, let’s practice the names of these letters.</i></p>
+                                </li>                          
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Teach the consonant letters: m-s-t-l-n</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Explain to your students they will learn five consonant letters.</p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Select the first letter (<b>m</b>) from the lower bar.</p>
+											</li>
+											<li>
+												<p>b. Have a student join the color chart sounds as you gradually show them on the screen.</p>
+											</li>
+											<li>
+												<p>c. Ask him/her to say the name of the letter at least twice.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with different students until you have covered all five consonant letters.</p>
+											</li>
+										</ol>
+										<div class="answer">
+										<table style="width: 500px">
+										<tr>
+											<td style="text-align: center; font-size: 18px;"><b>m</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>s</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>t</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>l</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>n</b></td>
+										</tr>
+										<tr>
+											<td style="text-align: center;"><img src="CC/CC-04.png" alt="Image 03" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-04.png" alt="Image 03" class="iconcc"> <img src="CC/CC-27.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-25.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-04.png" alt="Image 03" class="iconcc"> <img src="CC/CC-37.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-04.png" alt="Image 03" class="iconcc"> <img src="CC/CC-30.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 3. Help students review all previously taught consonants by saying the letter names. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Select a student and click on the button <img src="images/botonV.png" alt="Image 15" class="iconcc2" > to shuffle the letters.</p>
+										</li>
+										<li>
+											<p>b. Have the student pronounce each letter. If the pronunciation is correct, provide positive feedback. If the pronunciation is incorrect, follow the correction process: Click on the letter and have the student join the sounds aloud as you gradually show them on the screen to help recall the letter name.</p>
+										</li>
+										<li>
+											<p>c. Repeat the same procedure with two more students for the remaining sets of letters.</p>
+										</li>
+									</ol>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 4. Teach 5 new consonant letters: p-f-h-r-y</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Explain to your students they will learn five new consonant letters.</p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Select the first letter (<b>p</b>) from the lower bar.</p>
+											</li>
+											<li>
+												<p>b. Have a student join the color chart sounds as you gradually show them on the screen.</p>
+											</li>
+											<li>
+												<p>c. Ask him/her to say the name of the letter at least twice.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with different students until you have covered all five consonant letters.</p>
+											</li>
+										</ol>
+										<div class="answer">
+										<table style="width: 500px">
+										<tr>
+											<td style="text-align: center; font-size: 18px;"><b>p</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>f</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>h</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>r</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>y</b></td>
+										</tr>
+										<tr>
+											<td style="text-align: center;"><img src="CC/CC-24.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-04.png" alt="Image 03" class="iconcc"> <img src="CC/CC-31.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-16.png" alt="Image 03" class="iconcc"> <img src="CC/CC-45.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-09.png" alt="Image 03" class="iconcc"> <img src="CC/CC-40.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-38.png" alt="Image 03" class="iconcc"> <img src="CC/CC-15.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 5. Help students review all previously taught consonants by saying the letter names. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Select a student and click on the button <img src="images/botonV.png" alt="Image 15" class="iconcc2" > to shuffle the letters.</p>
+										</li>
+										<li>
+											<p>b. Have the student pronounce each letter. If the pronunciation is correct, provide positive feedback. If the pronunciation is incorrect, follow the correction process: Click on the letter and have the student join the sounds aloud as you gradually show them on the screen to help recall the letter name.</p>
+										</li>
+										<li>
+											<p>c. Repeat the same procedure with two more students for the remaining sets of letters.</p>
+										</li>
+									</ol>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 6. Teach 5 new consonant letters: b-c-d-g-v</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Explain to your students they will learn five new consonant letters.</p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Select the first letter (<b>b</b>) from the lower bar.</p>
+											</li>
+											<li>
+												<p>b. Have a student join the color chart sounds as you gradually show them on the screen.</p>
+											</li>
+											<li>
+												<p>c. Ask him/her to say the name of the letter at least twice.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with different students until you have covered all five consonant letters.</p>
+											</li>
+										</ol>
+										<div class="answer">
+										<table style="width: 500px">
+										<tr>
+											<td style="text-align: center; font-size: 18px;"><b>b</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>c</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>d</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>g</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>v</b></td>
+										</tr>
+										<tr>
+											<td style="text-align: center;"><img src="CC/CC-41.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-27.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-33.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-49.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-32.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 7. Help students review all previously taught consonants by saying the letter names. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Select a student and click on the button <img src="images/botonV.png" alt="Image 15" class="iconcc2" > to shuffle the letters.</p>
+										</li>
+										<li>
+											<p>b. Have the student pronounce each letter. If the pronunciation is correct, provide positive feedback. If the pronunciation is incorrect, follow the correction process: Click on the letter and have the student join the sounds aloud as you gradually show them on the screen to help recall the letter name.</p>
+										</li>
+										<li>
+											<p>c. Repeat the same procedure with two more students for the remaining sets of letters.</p>
+										</li>
+									</ol>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 8. Teach 6 new consonant letters: j-k-q-w-x-z</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Explain to your students they will learn six new consonant letters.</p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Select the first letter (<b>j</b>) from the lower bar.</p>
+											</li>
+											<li>
+												<p>b. Have a student join the color chart sounds as you gradually show them on the screen.</p>
+											</li>
+											<li>
+												<p>c. Ask him/her to say the name of the letter at least twice.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with different students until you have covered all six consonant letters.</p>
+											</li>
+										</ol>
+										<div class="answer">
+										<table style="width: 600px">
+										<tr>
+											<td style="text-align: center; font-size: 18px;"><b>j</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>k</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>q</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>w</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>x</b></td>
+											<td style="text-align: center; font-size: 18px;"><b>z</b></td>
+										</tr>
+										<tr>
+											<td style="text-align: center;"><img src="CC/CC-49.png" alt="Image 03" class="iconcc"> <img src="CC/CC-16.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-39.png" alt="Image 03" class="iconcc"> <img src="CC/CC-16.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-39.png" alt="Image 03" class="iconcc"> <img src="CC/CC-18.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-33.png" alt="Image 02" class="iconcc"> <img src="CC/CC-02.png" alt="Image 29" class="iconcc"> <img src="CC/CC-41.png" alt="Image 41" class="iconcc"> <img src="CC/CC-47.png" alt="Image 47" class="iconcc"> <img src="CC/CC-18.png" alt="Image 18" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-04.png" alt="Image 03" class="iconcc"> <img src="CC/CC-51.png" alt="Image 29" class="iconcc"></td>
+											<td style="text-align: center;"><img src="CC/CC-26.png" alt="Image 03" class="iconcc"> <img src="CC/CC-11.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 9. Help students review all previously taught consonants by saying the letter names. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Select a student and click on the button <img src="images/botonV.png" alt="Image 15" class="iconcc2" > to shuffle the letters.</p>
+										</li>
+										<li>
+											<p>b. Have the student pronounce each letter. If the pronunciation is correct, provide positive feedback. If the pronunciation is incorrect, follow the correction process: Click on the letter and have the student join the sounds aloud as you gradually show them on the screen to help recall the letter name.</p>
+										</li>
+										<li>
+											<p>c. Repeat the same procedure with two more students for the remaining sets of letters.</p>
+										</li>
+									</ol>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<!-- Phonics -->
+                <div class="content">
+                    <h2>Phonics</h2><br>
+					<p><span class="highlight">Learning goals:</span> Students will learn the names of the letters in the English alphabet and be introduced to English as a non-phonetic language, as well as to phonics.</p>		
+                    <div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Briefly explain to your students that English is a non-phonetic language and introduce phonics.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+									<span class="line"></span>
+									<p>You may explain it like this using the whiteboard:</p>
+									<p><i>Guys, languages can be divided into two big groups: phonetic languages and non-phonetic languages. Let me explain. </i></p>
+									<p><i>In phonetic languages, we usually pronounce words the same way we write them. For example, in Spanish, when we see this word… (write the word “<b>mesa</b>” on the whiteboard without pronouncing it), we know how to say it just by looking at it:  “<b>me-sa</b>” (pronounce the word out loud).</i></p>
+									<p><i>That’s a phonetic language.</i></p>
+									<p><i>But, non-phonetic languages are different. In non-phonetic languages, words are not always pronounced the way we write them. In English,  for example, if we see this word… (write the word “<b>table</b>” on the whiteboard without pronouncing it), we might think the pronunciation is “<b>ta-ble</b>” (pronounce the word out loud as suggested in Spanish)…</i></p>
+									<p><i>…but no! The correct pronunciation of this word is “table” (pronounce the word out loud correctly).</i></p>
+									<p><i>You see? The pronunciation is different from the letters.</i></p>
+									<p><i>That’s why in English, it’s important to learn, little by little, how letters and sounds work together.</i></p>
+									<p><i>Let’s see how this works…</i></p>
+                                </li>                                  
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Introduce short vowel sounds.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+									<span class="line"></span>
+									<p><i>Let’s start with some very important sounds in English: vowel sounds. We find these sounds in many words, so they are very important. We’ll begin with short vowel sounds… ready?</i></p>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 3. Introduce and practice the short vowel sound for the letter <i>“a.”</i> </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the first slide in the section “Phonics” and have a student say the name of the letter.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Alex, what is the name of this letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>"a"</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Great!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>b. Explain that, although the name of the letter is <i>“a”</i>  (sound <img src="CC/CC-16.png" alt="Image 29" class="iconcc2">) sometimes it is pronounced differently.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Guys, the name of this letter is <i>“a”,</i> but… sometimes it is pronounced differently.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>	
+									
+									<ol class="steps-list">
+										<li>
+											<p>c. Select a student and have him pronounce sound <img src="CC/CC-01.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Andrea, what is this sound? (as you reveal the sound by clicking on the blank circle)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“ah”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Very good! Again please.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“ah”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Excellent! The name of this letter is “a” but sometimes we pronounce it “ah”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>d. Briefly explain the phonics pattern for pronouncing letter <i>“a”</i> with sound <img src="CC/CC-01.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, when do we pronounce the letter “a” with the sound “ah”? Here is one rule:</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>When the letter “a” is between two consonants in a short word, it usually sounds like “ah”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Here is an example:</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>e. Show the next slide to practice spelling.</p>
+											<div class="answer">
+												<table style="max-width: 400px; text-align: center;">
+													<tr>
+														<td><p style="font-size: 4em; text-align: center; margin: 0; padding: 0 0 0 40px;">mat</p></td>
+													</tr>
+												</table><br>
+											</div>
+											
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Mario, look at this word. Now, please tell me the letters one by one. What is the first letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“m”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>The second letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“a”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>and the last letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“t”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Excellent! When we read a word letter by letter, we call this action “<b>spell</b>”, ok?</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, Mario please, <b>spell</b> this word for me.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>m - a - t.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Amazing!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											
+											<p>f. Show the next slide to explain visually how the phonics pattern works.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><img src="images/mat.png" alt="Image 29" style="max-width: 400px;"></td>
+													</tr>
+												</table><br>
+											</div>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Now, the letters of this word are <b>m</b>, <b>a</b>, and <b>t</b>.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>As you can see, we have the letter “a” between two consonants.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, we don’t pronounce this word “meyt”.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>How do we pronounce it?… (select a student randomly to say the correct pronunciation)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>mat</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Exactly! We pronounce it “mat”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 4. Have the students practice pronouncing words to reinforce the pattern just learned.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide.</p>
+										</li>
+										<li>
+											<p>b. Have a student spell the word.</p>
+										</li>
+										<li>
+											<p>c. Have the same student read the word. If the student makes a mistake, use verbal correction to guide the student to say the word correctly. Do not spend too much time on this step.</p>
+										</li>
+										<li>
+											<p>d. Follow the same procedure with different students for the rest of the words.</p>
+										</li>
+									</ol>
+										<div class="answer">
+										<table style="width: 300px">
+										<tr>
+											<th style="text-align: center; font-size: 18px;">Sample words
+
+</th>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">c<b><u class="highlight">a</u></b>t</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">d<b><u class="highlight">a</u></b>d</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">c<b><u class="highlight">a</u></b>p</td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 5. Introduce and practice the short vowel sound for the letter <i>“e.”</i></span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide in the section “Phonics” and have a student say the name of the letter.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Tom, what is the name of this letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>"e"</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Great!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>b. Explain that, although the name of the letter is <i>“e”</i>  (sound <img src="CC/CC-11.png" alt="Image 29" class="iconcc2">) sometimes it is pronounced differently.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Guys, the name of this letter is “e” but… sometimes it is pronounced differently.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>	
+									
+									<ol class="steps-list">
+										<li>
+											<p>c. Select a student and have him pronounce sound <img src="CC/CC-04.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Kate, what is this sound? (as you reveal the sound by clicking on the blank circle)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“eh”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Very good! Again please.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“eh”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Excellent! The name of this letter is “e” but sometimes we pronounce it “eh”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>d. Briefly explain the phonics pattern for pronouncing letter “e” with sound <img src="CC/CC-04.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, when do we pronounce the letter “e” with the sound “eh”? Here is one rule:</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>When the letter “e” is between two consonants in a short word, it usually sounds like “eh.”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Here is an example:</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>e. Show the next slide to practice spelling.</p>
+											<div class="answer">
+												<table style="max-width: 400px; text-align: center;">
+													<tr>
+														<td><p style="font-size: 4em; text-align: center; margin: 0; padding: 0 0 0 40px;">met</p></td>
+													</tr>
+												</table><br>
+											</div>
+											
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Brian, look at this word. Now, please tell me the letters one by one. What is the first letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“m”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>The second letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“e”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>The third letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“t”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, Brian please, <b>spell</b> this word for me.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>m - e - t.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Amazing!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											
+											<p>f. Show the next slide to explain visually how the phonics pattern works.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><img src="images/met.png" alt="Image 29" style="max-width: 400px;"></td>
+													</tr>
+												</table><br>
+											</div>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Now, the letters of this word are <b>m</b>, <b>e</b>, and <b>t</b>.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>As you can see, we have the letter “e” between two consonants.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, we don’t pronounce this word “meet”.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>How do we pronounce it?… (select a student randomly to say the correct pronunciation)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>met</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Exactly! We pronounce it “met”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 6. Have the students practice pronouncing words to reinforce the pattern just learned.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide.</p>
+										</li>
+										<li>
+											<p>b. Have a student spell the word.</p>
+										</li>
+										<li>
+											<p>c. Have the same student read the word. If the student makes a mistake, use verbal correction to guide the student to say the word correctly. Do not spend too much time on this step.</p>
+										</li>
+										<li>
+											<p>d. Follow the same procedure with different students for the rest of the words.</p>
+										</li>
+									</ol>
+										<div class="answer">
+										<table style="width: 300px">
+										<tr>
+											<th style="text-align: center; font-size: 18px;">Sample words
+
+</th>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">b<b><u class="highlight">e</u></b>d</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">t<b><u class="highlight">e</u></b>n</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">s<b><u class="highlight">e</u></b>ll</td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 7. Introduce and practice the short vowel sound for the letter <i>“i.”</i></span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide in the section “Phonics” and have a student say the name of the letter.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Lucas, what is the name of this letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>"i"</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Great!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>b. Explain that, although the name of the letter is <i>“i”</i>  (sound <img src="CC/CC-15.png" alt="Image 29" class="iconcc2">) sometimes it is pronounced differently.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Guys, the name of this letter is “i”, but… sometimes it is pronounced differently.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>	
+									
+									<ol class="steps-list">
+										<li>
+											<p>c. Select a student and have him pronounce sound <img src="CC/CC-03.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Laura, what is this sound? (as you reveal the sound by clicking on the blank circle)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“ih”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Very good! Again please.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“ih”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Excellent! The name of this letter is “i” but sometimes we pronounce it “ih”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>d. Briefly explain the phonics pattern for pronouncing letter “i” with sound <img src="CC/CC-03.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, when do we pronounce the letter “i” with the sound “ih”? Here is one rule:</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>When the letter “i” is between two consonants in a short word, it usually sounds like “ih.”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Here is an example:</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>e. Show the next slide to practice spelling.</p>
+											<div class="answer">
+												<table style="max-width: 400px; text-align: center;">
+													<tr>
+														<td><p style="font-size: 4em; text-align: center; margin: 0; padding: 0 0 0 40px;">sit</p></td>
+													</tr>
+												</table><br>
+											</div>
+											
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Chris, look at this word. Now, please tell me the letters one by one. What is the first letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“s”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>The second letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“i”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>and the last letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“t”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, Chris please, <b>spell</b> this word for me.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>s - i - t.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Amazing!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											
+											<p>f. Show the next slide to explain visually how the phonics pattern works.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><img src="images/sit.png" alt="Image 29" style="max-width: 400px;"></td>
+													</tr>
+												</table><br>
+											</div>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Now, the letters of this word are <b>s</b>, <b>i</b>, and <b>t</b>.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>As you can see, we have the letter “i” between two consonants.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, we don’t pronounce this word “sait”.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>How do we pronounce it?… (select a student randomly to say the correct pronunciation)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>sit</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Exactly! We pronounce it “sit”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 8. Have the students practice pronouncing words to reinforce the pattern just learned.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide.</p>
+										</li>
+										<li>
+											<p>b. Have a student spell the word.</p>
+										</li>
+										<li>
+											<p>c. Have the same student read the word. If the student makes a mistake, use verbal correction to guide the student to say the word correctly. Do not spend too much time on this step.</p>
+										</li>
+										<li>
+											<p>d. Follow the same procedure with different students for the rest of the words.</p>
+										</li>
+									</ol>
+										<div class="answer">
+										<table style="width: 300px">
+										<tr>
+											<th style="text-align: center; font-size: 18px;">Sample words</th>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">l<b><u class="highlight">i</u></b>p</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">t<b><u class="highlight">i</u></b>n</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">m<b><u class="highlight">i</u></b>ss</td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 9. Introduce and practice the short vowel sound for the letter <i>“o.”</i></span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide in the section “Phonics” and have a student say the name of the letter.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Jake, what is the name of this letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>"o"</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Great!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>b. Explain that, although the name of the letter is <i>“o”</i>  (sound <img src="CC/CC-17.png" alt="Image 29" class="iconcc2">) sometimes it is pronounced differently.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Guys, the name of this letter is “o”, but… sometimes it is pronounced differently.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>	
+									
+									<ol class="steps-list">
+										<li>
+											<p>c. Select a student and have him pronounce sound <img src="CC/CC-05.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Pam, what is this sound? (as you reveal the sound by clicking on the blank circle)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“oh”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Very good! Again please.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“oh”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Excellent! The name of this letter is “o” but sometimes we pronounce it “oh”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>d. Briefly explain the phonics pattern for pronouncing letter “o” with sound <img src="CC/CC-05.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, when do we pronounce the letter “o” with the sound “oh”? Here is one rule:</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>When the letter “o” is between two consonants in a short word, it usually sounds like “oh.”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Here is an example:</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>e. Show the next slide to practice spelling.</p>
+											<div class="answer">
+												<table style="max-width: 400px; text-align: center;">
+													<tr>
+														<td><p style="font-size: 4em; text-align: center; margin: 0; padding: 0 0 0 40px;">not</p></td>
+													</tr>
+												</table><br>
+											</div>
+											
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>David, look at this word. Now, please tell me the letters one by one. What is the first letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“n”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>The second letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“o”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>and the last letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“t”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, David please, <b>spell</b> this word for me.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>n - o - t.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Amazing!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											
+											<p>f. Show the next slide to explain visually how the phonics pattern works.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><img src="images/not.png" alt="Image 29" style="max-width: 400px;"></td>
+													</tr>
+												</table><br>
+											</div>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Now, the letters of this word are <b>n</b>, <b>o</b>, and <b>t</b>.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>As you can see, we have the letter “o” between two consonants.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, we don’t pronounce this word “nout”.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>How do we pronounce it?… (select a student randomly to say the correct pronunciation)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>not</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Exactly! We pronounce it “not”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 10. Have the students practice pronouncing words to reinforce the pattern just learned.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide.</p>
+										</li>
+										<li>
+											<p>b. Have a student spell the word.</p>
+										</li>
+										<li>
+											<p>c. Have the same student read the word. If the student makes a mistake, use verbal correction to guide the student to say the word correctly. Do not spend too much time on this step.</p>
+										</li>
+										<li>
+											<p>d. Follow the same procedure with different students for the rest of the words.</p>
+										</li>
+									</ol>
+										<div class="answer">
+										<table style="width: 300px">
+										<tr>
+											<th style="text-align: center; font-size: 18px;">Sample words</th>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">m<b><u class="highlight">o</u></b>p</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">b<b><u class="highlight">o</u></b>x</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">r<b><u class="highlight">o</u></b>ck</td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 11. Introduce and practice the short vowel sound for the letter <i>“u.”</i></span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide in the section “Phonics” and have a student say the name of the letter.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>George, what is the name of this letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>"u"</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Great!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>b. Explain that, although the name of the letter is <i>“u”</i>  (sound <img src="CC/CC-18.png" alt="Image 29" class="iconcc2">) sometimes it is pronounced differently.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Guys, the name of this letter is “u”, but… sometimes it is pronounced differently.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>	
+									
+									<ol class="steps-list">
+										<li>
+											<p>c. Select a student and have him pronounce sound <img src="CC/CC-02.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Sara, what is this sound? (as you reveal the sound by clicking on the blank circle)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“uh”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Very good! Again please.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“uh”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Excellent! The name of this letter is “u” but sometimes we pronounce it “uh”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>d. Briefly explain the phonics pattern for pronouncing letter “u” with sound <img src="CC/CC-02.png" alt="Image 29" class="iconcc2"> .</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, when do we pronounce the letter “u” with the sound “uh”? Here is one rule:</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>When the letter “u” is between two consonants in a short word, it usually sounds like “uh.”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Here is an example:</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											<p>e. Show the next slide to practice spelling.</p>
+											<div class="answer">
+												<table style="max-width: 400px; text-align: center;">
+													<tr>
+														<td><p style="font-size: 4em; text-align: center; margin: 0; padding: 0 0 0 40px;">cut</p></td>
+													</tr>
+												</table><br>
+											</div>
+											
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Pete, look at this word. Now, please tell me the letters one by one. What is the first letter?</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“c”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>The second letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“u”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>and the last letter…</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>“t”</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, Pete please, <b>spell</b> this word for me.</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>c - u - t.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Amazing!</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									<ol class="steps-list">
+										<li>
+											
+											<p>f. Show the next slide to explain visually how the phonics pattern works.</p>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><img src="images/cut.png" alt="Image 29" style="max-width: 400px;"></td>
+													</tr>
+												</table><br>
+											</div>
+											<div class="answer">
+												<table style="width: auto;">
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Now, the letters of this word are <b>c</b>, <b>u</b>, and <b>t</b>.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>As you can see, we have the letter “u” between two consonants.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>So, we don’t pronounce this word “kyut”.</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>How do we pronounce it?… (select a student randomly to say the correct pronunciation)</i></td>
+													</tr>
+													<tr>
+														<td><b>Student:</b></td>
+														<td><i>cut</i></td>
+													</tr>
+													<tr>
+														<td><b>Teacher:</b></td>
+														<td><i>Exactly! We pronounce it “cut”.</i></td>
+													</tr>
+												</table><br>
+											</div>
+										</li>
+									</ol>
+									
+									
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 12. Have the students practice pronouncing words to reinforce the pattern just learned.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the next slide.</p>
+										</li>
+										<li>
+											<p>b. Have a student spell the word.</p>
+										</li>
+										<li>
+											<p>c. Have the same student read the word. If the student makes a mistake, use verbal correction to guide the student to say the word correctly. Do not spend too much time on this step.</p>
+										</li>
+										<li>
+											<p>d. Follow the same procedure with different students for the rest of the words.</p>
+										</li>
+									</ol>
+										<div class="answer">
+										<table style="width: 300px">
+										<tr>
+											<th style="text-align: center; font-size: 18px;">Sample words</th>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">s<b><u class="highlight">u</u></b>n</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">b<b><u class="highlight">u</u></b>s</td>
+										</tr>
+										<tr>
+											<td style="text-align: center; font-size: 18px;">c<b><u class="highlight">u</u></b>p</td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<!-- Extra activities -->
+                <div class="content">
+                    <h2>Extra activities</h2><br>
+					<p><span class="highlight">If there is any extra time, write the following ideas on the whiteboard and have different students read them:</span></p><br>	
+					<span style="margin-left: 20px;">- Matt is sad.</span><br>
+					<span style="margin-left: 20px;">- The cat is fat.</span><br>
+					<span style="margin-left: 20px;">- The dog is big.</span><br>
+					<span style="margin-left: 20px;">- The bag is red.</span><br>
+					<span style="margin-left: 20px;">- The man is in the car.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Función para manejar el cambio de pestañas
+function handleTabChange() {
+    adjustContainerHeight();
+
+    setTimeout(function () {
+        adjustContainerHeight();
+    }, 100);
+
+    setTimeout(function () {
+        adjustContainerHeight();
+    }, 300);
+}
+
+    // Manejar el cambio de pestañas
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', handleTabChange);
+    });
+
+// Manejo de acordeón
+function adjustContainerHeight() {
+    const container = document.querySelector('.container');
+
+    const activeContent = document.querySelector(
+        'input[type="radio"]:checked ~ .container .content-box .content:nth-child(' +
+        getActiveIndex() +
+        ')'
+    );
+
+    if (!container || !activeContent) return;
+
+    const alturaCompleta = activeContent.scrollHeight;
+
+    container.style.height = alturaCompleta + 50 + 'px';
+    container.style.minHeight = '0px';
+}
+
+function getActiveIndex() {
+    if (document.getElementById('daily').checked) return 1;
+    if (document.getElementById('steps').checked) return 2;
+    if (document.getElementById('seg1').checked) return 3;
+    if (document.getElementById('seg2').checked) return 4;
+    if (document.getElementById('seg3').checked) return 5;
+    return 1;
+}
+// Escuchar cambios en el tamaño de la ventana para hacerlo responsivo
+window.addEventListener('resize', adjustContainerHeight);
+
+window.addEventListener('load', function () {
+    adjustContainerHeight();
+
+    setTimeout(adjustContainerHeight, 300);
+    setTimeout(adjustContainerHeight, 800);
+});
+
+// Ejecutar al cargar la estructura inicial
+adjustContainerHeight();
+
+
+
+// Manejo del acordeón en la lista (solo un acordeón abierto a la vez)
+const accordionItems = document.querySelectorAll('.accordion-text li');
+accordionItems.forEach(item => {
+    item.addEventListener('click', function () {
+        const isOpen = this.classList.contains('showAnswer'); // Verifica si ya está abierto
+        
+        // Cerrar todos los acordeones
+        accordionItems.forEach(i => i.classList.remove('showAnswer'));
+        
+        // Si el acordeón no estaba abierto, abrirlo
+		if (!isOpen) {
+			this.classList.add('showAnswer');
+		}
+
+		setTimeout(adjustContainerHeight, 50);
+    });
+});
+
+    // Manejo del acordeón en los elementos
+    const accordionItems2 = document.querySelectorAll('.accordion-item2');
+    accordionItems2.forEach(item => {
+        const header = item.querySelector('.accordion-header2');
+        header.addEventListener('click', function () {
+            const content = item.querySelector('.accordion-content2');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.classList.toggle('active2');
+            
+            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+            adjustContainerHeight();
+        });
+    });
+	// Manejo del acordeón en los elementos
+    const accordionItems3 = document.querySelectorAll('.accordion-item');
+    accordionItems3.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', function () {
+            const content = item.querySelector('.accordion-content');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.classList.toggle('active');
+            
+            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+            adjustContainerHeight();
+        });
+    });
+
+    // Inicializar altura del contenedor al cargar
+    adjustContainerHeight();
+});
+</script>
+</body>
+</html>
